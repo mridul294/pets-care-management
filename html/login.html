@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="PetsApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Petscare.com</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="login.js" defer></script>
+</head>
+
+<body ng-controller="LoginController">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #32CD32;">
+        <a class="navbar-brand" href="home.html">
+            <img src="dog-paw.png" alt="Paw Logo" width="50">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="subscription.html">Subscription</a></li>
+                <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="login-container">
+        <h2 class="login-header">Login to Petscare.com</h2>
+        <form ng-submit="loginUser()">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" ng-model="credentials.username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" ng-model="credentials.password" required>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+        </form>
+
+        <!-- Alerts -->
+        <div class="alert alert-success" ng-show="successMessage">
+            {{successMessage}}
+        </div>
+        <div class="alert alert-danger" ng-show="errorMessage">
+            {{errorMessage}}
+        </div>
+
+        <div class="footer">
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+    </div>
+</body>
+
+</html>

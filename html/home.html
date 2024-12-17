@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="PetsApp">
+
+<head>
+    <title>Petscare.com</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="petscare.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+    <script src="petscare.js" defer></script>
+</head>
+
+<body ng-controller="PetsController">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #32CD32;">
+        <a class="navbar-brand" href="#">
+            <img src="PAws.png" alt="Paw Logo" width="40px">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="subscription.html">Subscription</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" ng-click="toggleCart()">Cart <span class="badge badge-light">{{cart.length}}</span></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="header text-center">
+        <img src="PAws.png" alt="Dog Paw Logo" class="img-fluid logo-medium">
+        <h1>PETSCARE.COM</h1>
+        <p>Your one-stop shop for pet products and services</p>
+    </div>
+
+    <!-- Search Bar with Category Dropdown -->
+    <div class="search-bar-container">
+        <input type="text" ng-model="searchQuery" class="search-input" placeholder="Search for pet products...">
+        <button class="search-button" ng-click="searchProducts()">Search</button>
+        <select class="form-control category-select" ng-model="selectedCategory" ng-change="filterByCategory()">
+            <option value="">All Categories</option>
+            <option value="Toys">Dog</option>
+            <option value="Food">Cat</option>
+            <option value="Aquarium">Fish</option>
+            <option value="Accessories">Bird</option>
+        </select>
+    </div>
+
+    <!-- Subscription Section -->
+    <div class="subscription-section">
+        <h2>Join Our Subscription!</h2>
+        <p>Get quick delivery and exclusive discounts starting from just ₹99/month!</p>
+        <a href="subscription.html"><button class="cta-button">Subscribe Now</button></a>
+    </div>
+
+    <!-- Product Section -->
+    <div class="container" id="product-section">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 mb-4" ng-repeat="product in filteredProducts">
+                <div class="card product-card">
+                    <img ng-src="{{product.image}}" class="card-img-top" alt="{{product.name}}">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text">Price: ${{product.price}}</p>
+                        <button class="btn btn-success" ng-click="addToCart(product)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div id="cart-overlay" class="cart-overlay" ng-show="showCart">
+        <h4>Your Cart</h4>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="item in cart">{{item.name}} - ${{item.price}}</li>
+        </ul>
+        <button class="btn btn-primary btn-block mt-4" ng-click="proceedToBilling()">Proceed to Billing</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 bg-dark text-white">
+        &copy; 2024 Petscare.com. All Rights Reserved.
+    </footer>
+</body>
+
+</html>

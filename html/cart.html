@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="PetsApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - Petscare.com</title>
+    <link rel="stylesheet" href="cart.css">
+    <script src="cart.js" defer></script>
+</head>
+
+<body ng-controller="CartController">
+    <!-- Header Section -->
+    <div class="header">
+        <h1>Your Cart</h1>
+        <a href="home.html" class="btn btn-light">Home</a>
+        <a href="subscription.html" class="btn btn-light">Subscription</a>
+        <a href="login.html" class="btn btn-light">Login</a>
+    </div>
+
+    <div class="container cart-container">
+        <h2>Items in Your Cart</h2>
+        <ul class="list-group mb-4">
+            <li class="list-group-item" ng-repeat="item in cart">
+                {{item.name}} - ₹{{item.price}}
+                <button class="btn btn-danger btn-sm float-right" ng-click="removeFromCart(item)">Remove</button>
+            </li>
+        </ul>
+
+        <h4>Total Amount: ₹{{totalAmount()}}</h4>
+        
+        <h4>Billing Information</h4>
+        <form ng-submit="processPayment()">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control" ng-model="billing.name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control" ng-model="billing.email" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" class="form-control" ng-model="billing.address" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+        </form>
+    </div>
+</body>
+
+</html>
